@@ -1,23 +1,18 @@
 import React from 'react';
-import {useSelector, connect} from 'react-redux';
 import * as actions from '../actions/actions';
+import {useSelector, useDispatch} from 'react-redux';
 
-const App = props => {
-  const {increment, decrement} = props;
+const App = () => {
+  const dispatch = useDispatch();
   const count = useSelector(store => store.count);
 
   return (
     <div>
       <h1>The count is {count}</h1>
-      <button onClick={() => increment(count)}>+</button>
-      <button onClick={() => decrement(count)}>-</button>
+      <button onClick={() => dispatch(actions.increment(count))}>+</button>
+      <button onClick={() => dispatch(actions.decrement(count))}>-</button>
     </div>
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  increment: count => dispatch(actions.increment(count)),
-  decrement: count => dispatch(actions.decrement(count))
-});
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
